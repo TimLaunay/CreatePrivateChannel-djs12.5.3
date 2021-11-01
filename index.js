@@ -5,6 +5,7 @@ let privateChannels = [];
 let categoryID = "895645003630665728"
 let channelID = "895645004662439957"
 client.on("voiceStateUpdate", async (OLD, NEW) => {
+  if((OLD.mute && !NEW.mute) || (NEW.mute && !OLD.mute)) return;
   // Создание
   if (NEW.channel != null && NEW.channel.id == channelID) {
     const textChannel = await NEW.guild.channels.create(`Канал ${NEW.member.user.username}`, {
@@ -17,7 +18,7 @@ client.on("voiceStateUpdate", async (OLD, NEW) => {
         },
         {
           id: NEW.member.id,
-          allow: [Permissions.FLAGS.VIEW_CHANNEL, Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.MANAGE_ROLES]
+          allow: ['VIEW_CHANNEL', "MANAGE_CHANNELS", "MANAGE_ROLES"]
         }]
     })
 
@@ -27,7 +28,7 @@ client.on("voiceStateUpdate", async (OLD, NEW) => {
       permissionOverwrites: [
         {
           id: NEW.member.id,
-          allow: [Permissions.FLAGS.VIEW_CHANNEL, Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.MANAGE_ROLES],
+          allow: ['VIEW_CHANNEL', "MANAGE_CHANNELS", "MANAGE_ROLES"],
         }]
     })
     await NEW.member.voice.setChannel(voiceChannel)
@@ -61,7 +62,7 @@ client.on("voiceStateUpdate", async (OLD, NEW) => {
         await textChannel.delete()
         await voiceChannel.delete()
       }
-      else if (find[0].owner != OLD.member.id && ( !OLD.mute || !OLD.deaf )) textChannel.permissionOverwrites.get(OLD.member.id)?.delete()
+      else if (find[0].owner != OLD.member.id) textChannel.permissionOverwrites.get(OLD.member.id)?.delete()
     }
   }
 })
