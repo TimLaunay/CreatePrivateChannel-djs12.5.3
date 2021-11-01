@@ -61,7 +61,7 @@ client.on("voiceStateUpdate", async (OLD, NEW) => {
         await textChannel.delete()
         await voiceChannel.delete()
       }
-      else if (find[0].owner != OLD.member.id) textChannel.permissionOverwrites.get(OLD.member.id)?.delete()
+      else if (find[0].owner != OLD.member.id && ( OLD.mute || OLD.deaf )) textChannel.permissionOverwrites.get(OLD.member.id)?.delete()
     }
   }
 })
