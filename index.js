@@ -66,4 +66,4 @@ client.on("voiceStateUpdate", async (OLD, NEW) => {
   }
 })
 
-client.login("ODI3NjcwMzU5NTUzMzQzNTQ5.YGeaFw.ZBoCDe4GOo8u3qCNyO-z6rNtaus")
+client.login("wat")
