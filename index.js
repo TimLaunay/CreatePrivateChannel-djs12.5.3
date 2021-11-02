@@ -2,10 +2,10 @@ const { Client, Permissions } = require('discord.js')
 const client = new Client()
 
 let privateChannels = [];
-let categoryID = "895645003630665728"
-let channelID = "895645004662439957"
+let categoryID = "айди категории"
+let channelID = "айди канала"
 client.on("voiceStateUpdate", async (OLD, NEW) => {
-  if((OLD.mute && !NEW.mute) || (NEW.mute && !OLD.mute)) return;
+  if((OLD.mute && !NEW.mute) || (NEW.mute && !OLD.mute) || ((OLD.mute && OLD.deaf) && (!NEW.mute && !NEW.deaf)) || (OLD.mute && NEW.mute && NEW.deaf) || (OLD.mute && OLD.deaf && NEW.mute && !NEW.deaf)) return;
   // Создание
   if (NEW.channel != null && NEW.channel.id == channelID) {
     const textChannel = await NEW.guild.channels.create(`Канал ${NEW.member.user.username}`, {
