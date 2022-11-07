@@ -2,8 +2,8 @@ const { Client, Permissions } = require('discord.js')
 const client = new Client()
 
 let privateChannels = [];
-let categoryID = "айди категории"
-let channelID = "айди канала"
+let categoryID = "ID catégorie"
+let channelID = "ID de salon"
 client.on("voiceStateUpdate", async (OLD, NEW) => {
   if((OLD.mute && !NEW.mute) || (NEW.mute && !OLD.mute) || ((OLD.mute && OLD.deaf) && (!NEW.mute && !NEW.deaf)) || (OLD.mute && NEW.mute && NEW.deaf) || (OLD.mute && OLD.deaf && NEW.mute && !NEW.deaf)) return;
   // Создание
